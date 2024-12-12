@@ -10,6 +10,14 @@ declare module "*.jpeg" {
   const value: any;
   export default value;
 }
+declare module "*.js" {
+  const value: any;
+  export default value;
+}
+declare module "*.ttf" {
+  const value: any;
+  export default value;
+}
 declare module "*.svg" {
   import React from "react";
   import { SvgProps } from "react-native-svg";

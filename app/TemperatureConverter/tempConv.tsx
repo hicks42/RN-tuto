@@ -16,8 +16,8 @@ import {
 } from "./services/TemperatureConvertionService";
 
 export default function tempConv() {
-  const [inputValue, setInpuValue] = useState(DEFAULT_TEMP);
-  const [currentUnit, setCurrentUnit] = useState(DEFAULT_UNIT);
+  const [inputValue, setInpuValue] = useState<string>(DEFAULT_TEMP);
+  const [currentUnit, setCurrentUnit] = useState<string>(DEFAULT_UNIT);
   const [currentBkgImg, setCurrentBkgImg] = useState(hotBkgImg);
   const oppositeUnit = getOppositeUnit(currentUnit);
 
@@ -25,7 +25,7 @@ export default function tempConv() {
   useEffect(() => {
     const temperatureAsFloat = Number.parseFloat(inputValue);
     if (!isNaN(temperatureAsFloat)) {
-      const isCold = isIced(inputValue, currentUnit);
+      const isCold = isIced(temperatureAsFloat, currentUnit);
       setCurrentBkgImg(isCold ? coldBkgImg : hotBkgImg);
     }
   }, [inputValue, currentUnit]);
@@ -33,6 +33,7 @@ export default function tempConv() {
   // convertir la inputValue pour l'afficher
   function getConvertedTemp() {
     const valueAsFloat = Number.parseFloat(inputValue);
+    console.log("valueAsFloat:", valueAsFloat);
     return isNaN(valueAsFloat)
       ? ""
       : convertTempTo(valueAsFloat, oppositeUnit).toFixed(1);
