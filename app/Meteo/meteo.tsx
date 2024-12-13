@@ -1,9 +1,14 @@
 import AlataRegular from "@/assets/fonts/Alata-Regular.ttf";
 import bckgImg from "@/assets/images/meteo-background.png";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Home from "./pages/Home";
+
+const navTheme = { colors: { background: "tranparent" } };
+
+const Stack = createNativeStackNavigator();
 
 export default function meteo() {
   const [isFontLoaded] = useFonts({ "Alata-Regular": AlataRegular });
@@ -11,7 +16,17 @@ export default function meteo() {
     <ImageBackground style={s.backGd} source={bckgImg} imageStyle={s.img}>
       <SafeAreaProvider>
         <SafeAreaView style={s.container}>
-          {isFontLoaded ? <Home /> : null}
+          {isFontLoaded ? (
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+                contentStyle: { backgroundColor: "transparent" },
+              }}
+              initialRouteName="Home"
+            >
+              <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+          ) : null}
         </SafeAreaView>
       </SafeAreaProvider>
     </ImageBackground>

@@ -33,7 +33,6 @@ export default function tempConv() {
   // convertir la inputValue pour l'afficher
   function getConvertedTemp() {
     const valueAsFloat = Number.parseFloat(inputValue);
-    console.log("valueAsFloat:", valueAsFloat);
     return isNaN(valueAsFloat)
       ? ""
       : convertTempTo(valueAsFloat, oppositeUnit).toFixed(1);

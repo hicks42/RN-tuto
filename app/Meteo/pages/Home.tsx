@@ -1,6 +1,6 @@
 import { MeteoAPI } from "@/app/Meteo/api/meteo";
 import * as Location from "expo-location";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import MeteoAdvanced from "../components/MeteoAdvanced";
 import MeteoBasic from "../components/MeteoBasic";
@@ -44,7 +44,6 @@ export default function Home() {
 
   async function fetchWeather(coords: Coordinates) {
     const weatherResponse = await MeteoAPI.fetchWeatherFromCoords(coords);
-    console.log("weatherResponse:", weatherResponse);
     setWeather(weatherResponse);
   }
 

@@ -14,11 +14,7 @@ export default function Clock() {
     };
   }, []);
 
-  return (
-    <>
-      <Txt style={""}>{time}</Txt>
-    </>
-  );
+  return <Txt style={""}>{time}</Txt>;
 }
 
 const s = StyleSheet.create({});

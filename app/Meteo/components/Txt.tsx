@@ -7,11 +7,7 @@ export default function Txt({
   children: any;
   style: any;
 }) {
-  return (
-    <>
-      <Text style={[s.txt, style]}>{children}</Text>
-    </>
-  );
+  return <Text style={[s.txt, style]}>{children}</Text>;
 }
 
 const s = StyleSheet.create({
