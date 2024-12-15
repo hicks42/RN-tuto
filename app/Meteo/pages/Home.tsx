@@ -1,18 +1,33 @@
-import { MeteoAPI } from "@/app/Meteo/api/meteo";
+import { MeteoAPI } from "@/app/Meteo/api/meteoAPI";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import Container from "../components/Container";
 import MeteoAdvanced from "../components/MeteoAdvanced";
 import MeteoBasic from "../components/MeteoBasic";
+import SearchBar from "../components/SearchBar";
 import { getInterpretation } from "../services/services";
+
+type NavigationProps = NativeStackNavigationProp<
+  RootStackParamList,
+  "Forecast"
+>;
+type RootStackParamList = {
+  Forecast: { actualCity: string; [key: string]: any };
+  Home: undefined;
+};
 interface Coordinates {
   lat: number;
   lng: number;
 }
+
 export default function Home() {
   const [coords, setCoords] = useState<Coordinates | undefined>();
   const [weather, setWeather] = useState<Record<string, any>>();
-  const [city, setCity] = useState<string | null | undefined>();
+  const [actualCity, setActualCity] = useState<string | null | undefined>();
+  const nav = useNavigation<NavigationProps>();
   const currentWeather = weather?.current_weather;
 
   useEffect(() => {
@@ -49,19 +64,35 @@ export default function Home() {
 
   async function fetchCityName(coords: Coordinates) {
     const cityResponse = await MeteoAPI.fetchCityFromCoords(coords);
-    setCity(cityResponse);
+    setActualCity(cityResponse);
+  }
+
+  function goToForecastPage() {
+    nav.navigate("Forecast", { actualCity, ...weather?.daily });
+  }
+
+  async function fetchCoordsByCity(inputCityName: string) {
+    try {
+      const coords = await MeteoAPI.fetchCoordsFromCity(inputCityName);
+      setCoords(coords);
+    } catch (error: any) {
+      Alert.alert("Désolé !", error);
+    }
   }
 
   return currentWeather ? (
-    <>
+    <Container>
       <View>
         <MeteoBasic
           temperature={Math.round(currentWeather?.temperature)}
-          city={city || "Localité inconnue"}
+          city={actualCity || "Localité inconnue"}
           interpretation={getInterpretation(currentWeather?.weathercode)}
+          onPress={goToForecastPage}
         />
       </View>
-      <View style={s.meteo_search}></View>
+      <View style={s.meteo_search}>
+        <SearchBar onSubmit={fetchCoordsByCity} />
+      </View>
       <View style={s.meteo_advanced}>
         <MeteoAdvanced
           dawn={weather.daily.sunrise[0].split("T")[1]}
@@ -70,7 +101,7 @@ export default function Home() {
           windUnit={weather.current_weather_units.windspeed}
         />
       </View>
-    </>
+    </Container>
   ) : null;
 }
 

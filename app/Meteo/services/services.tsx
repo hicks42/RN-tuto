@@ -1,4 +1,12 @@
-export const WEATHER_INTERPRATIONS = [
+import { ImageSourcePropType } from "react-native";
+
+interface WeatherInterpretation {
+  codes: number[];
+  label: string;
+  image: string | ImageSourcePropType;
+}
+
+export const WEATHER_INTERPRATIONS: WeatherInterpretation[] = [
   {
     codes: [0],
     label: "Ensoleillé",
@@ -26,7 +34,9 @@ export const WEATHER_INTERPRATIONS = [
   },
 ];
 
-export function getInterpretation(weatherCode: number) {
+export function getInterpretation(
+  weatherCode: number
+): WeatherInterpretation | undefined {
   return WEATHER_INTERPRATIONS.find((interpretation) =>
     interpretation.codes.includes(weatherCode)
   );
