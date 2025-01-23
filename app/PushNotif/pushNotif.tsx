@@ -3,6 +3,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { useEffect, useRef, useState } from "react";
 import { Button, Platform, Text, View } from "react-native";
+import NewNotification from "./NewNotification";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -12,12 +13,12 @@ Notifications.setNotificationHandler({
   }),
 });
 
-async function sendPushNotification(expoPushToken: string) {
+async function sendPushNotification(expoPushToken: string, notification: any) {
   const message = {
     to: expoPushToken,
     sound: "default",
-    title: "Original Title",
-    body: "And here is the body!",
+    title: notification.title ? notification.title : "Original Title",
+    body: notification.body ? notification.body : "And here is the body!",
     data: { someData: "goes here" },
   };
 
@@ -83,6 +84,17 @@ async function registerForPushNotificationsAsync() {
 }
 
 export default function pushNotif() {
+  const [newNotification, setNewNotification] = useState({
+    title: "",
+    body: "",
+  });
+
+  const handleChange = (name: string, value: string) => {
+    setNewNotification({
+      ...newNotification,
+      [name]: value,
+    });
+  };
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
@@ -118,6 +130,11 @@ export default function pushNotif() {
       style={{ flex: 1, alignItems: "center", justifyContent: "space-around" }}
     >
       {/* <Text>Your Expo push token: {expoPushToken}</Text> */}
+      <NewNotification
+        title={newNotification.title}
+        body={newNotification.body}
+        onChangeText={handleChange}
+      />
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <Text>
           Title: {notification && notification.request.content.title}{" "}
@@ -131,7 +148,7 @@ export default function pushNotif() {
       <Button
         title="Press to Send Notification"
         onPress={async () => {
-          await sendPushNotification(expoPushToken);
+          await sendPushNotification(expoPushToken, newNotification);
         }}
       />
     </View>

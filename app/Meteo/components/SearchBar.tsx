@@ -17,6 +17,7 @@ const s = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     height: 40,
+    width: 50,
     fontFamily: "Alata-Regular",
     paddingLeft: 10,
     shadowColor: "#000",
@@ -26,7 +27,6 @@ const s = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
   },
 });
