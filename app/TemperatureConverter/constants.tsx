@@ -4,3 +4,7 @@ export const UNITS = {
   farenheit: "°F",
 };
 export const DEFAULT_UNIT = UNITS.celcius;
+
+export default function constants() {
+  console.log("Default export for compatibility");
+}

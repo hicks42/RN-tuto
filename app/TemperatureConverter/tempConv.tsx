@@ -1,9 +1,9 @@
+import coldBkgImg from "@/app/TemperatureConverter/assets/images/cold.png";
+import hotBkgImg from "@/app/TemperatureConverter/assets/images/hot.png";
 import {
   DEFAULT_TEMP,
   DEFAULT_UNIT,
 } from "@/app/TemperatureConverter/constants";
-import coldBkgImg from "@/assets/images/cold.png";
-import hotBkgImg from "@/assets/images/hot.png";
 import { useEffect, useState } from "react";
 import { ImageBackground, StyleSheet, View } from "react-native";
 import DisplayTemp from "./components/DisplayTemp";

@@ -1,9 +1,9 @@
-import bckgImg from "@/assets/images/meteo-background.png";
+import bckgImg from "@/app/Meteo/assets/images/meteo-background.png";
 import React from "react";
 import { ImageBackground, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-export default function Container({ children }) {
+export default function Container({ children }: { children: any }) {
   return (
     <ImageBackground style={s.backGd} source={bckgImg} imageStyle={s.img}>
       <SafeAreaProvider>

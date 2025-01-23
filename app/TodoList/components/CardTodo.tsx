@@ -1,4 +1,4 @@
-import CheckImg from "@/assets/images/check.png";
+import CheckImg from "@/app/TodoList/assets/images/check.png";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 interface Todo {
   id: number;

@@ -60,3 +60,7 @@ export class MeteoAPI {
     }
   }
 }
+
+export default function meteoAPI() {
+  console.log("Default export for compatibility");
+}

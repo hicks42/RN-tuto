@@ -4,7 +4,7 @@ export default function MeteoLayout() {
   return (
     <Stack
       screenOptions={{
-        headerShown: false, // Désactive l'en-tête global
+        headerShown: false,
       }}
     />
   );

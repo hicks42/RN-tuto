@@ -10,27 +10,27 @@ export const WEATHER_INTERPRATIONS: WeatherInterpretation[] = [
   {
     codes: [0],
     label: "Ensoleillé",
-    image: require("@/assets/images/meteo_img/meteo_img/sun.png"),
+    image: require("@/app/Meteo/assets/images/sun.png"),
   },
   {
     codes: [1, 2, 3, 45, 48],
     label: "Nuageux",
-    image: require("@/assets/images/meteo_img/meteo_img/clouds.png"),
+    image: require("@/app/Meteo/assets/images/clouds.png"),
   },
   {
     codes: [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 85, 86],
     label: "Pluvieux",
-    image: require("@/assets/images/meteo_img/meteo_img/rain.png"),
+    image: require("@/app/Meteo/assets/images/rain.png"),
   },
   {
     codes: [71, 73, 75, 77],
     label: "Neigeux",
-    image: require("@/assets/images/meteo_img/meteo_img/snow.png"),
+    image: require("@/app/Meteo/assets/images/snow.png"),
   },
   {
     codes: [96, 99],
     label: "Orageux",
-    image: require("@/assets/images/meteo_img/meteo_img/thunder.png"),
+    image: require("@/app/Meteo/assets/images/thunder.png"),
   },
 ];
 
@@ -40,4 +40,8 @@ export function getInterpretation(
   return WEATHER_INTERPRATIONS.find((interpretation) =>
     interpretation.codes.includes(weatherCode)
   );
+}
+
+export default function services() {
+  console.log("Default export for compatibility");
 }

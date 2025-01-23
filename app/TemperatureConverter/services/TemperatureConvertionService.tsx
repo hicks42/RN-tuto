@@ -19,3 +19,7 @@ export function isIced(value: number, unit: string) {
     return value <= 32;
   }
 }
+
+export default function TemperatureConvertionService() {
+  console.log("Default export for compatibility");
+}
